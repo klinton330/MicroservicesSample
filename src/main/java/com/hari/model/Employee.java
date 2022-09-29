@@ -1,5 +1,9 @@
 package com.hari.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+//@JsonIgnoreProperties({"department","lastName"})
 public class Employee {
 	
 	private String employeeId;
@@ -32,6 +36,7 @@ public class Employee {
 	public void setEmailId(String emailId) {
 		this.emailId = emailId;
 	}
+	@JsonIgnore
 	public String getDepartment() {
 		return department;
 	}

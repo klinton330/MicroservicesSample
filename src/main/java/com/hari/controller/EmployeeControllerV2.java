@@ -15,15 +15,15 @@ import com.hari.model.Employee;
 import com.hari.service.EmployeeService;
 
 @RestController
-@RequestMapping("/v1/employee")
-public class EmployeeController {
+@RequestMapping("/v2/employee")
+public class EmployeeControllerV2 {
 
 	@Autowired
 	public EmployeeService employeeServiceImpl;
 
 	@PostMapping
 	public Employee saveEmployee(@RequestBody Employee e) {
-		return employeeServiceImpl.Save(e);
+		return e;
 	}
 	
 	@GetMapping
