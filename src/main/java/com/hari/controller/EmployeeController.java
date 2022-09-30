@@ -3,6 +3,7 @@ package com.hari.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,12 +15,14 @@ import org.springframework.web.bind.annotation.RestController;
 import com.hari.model.Employee;
 import com.hari.service.EmployeeService;
 //Controller
+
 @RestController
 @RequestMapping("/v1/employee")
 public class EmployeeController {
 
+	@Qualifier("employeeServiceImpl")
 	@Autowired
-	public EmployeeService employeeServiceImpl;
+	private EmployeeService employeeServiceImpl;
 
 	@PostMapping
 	public Employee saveEmployee(@RequestBody Employee e) {
