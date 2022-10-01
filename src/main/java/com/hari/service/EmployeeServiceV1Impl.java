@@ -1,6 +1,7 @@
 package com.hari.service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +11,6 @@ import org.springframework.stereotype.Service;
 import com.hari.entity.EmployeeEntity;
 import com.hari.model.Employee;
 import com.hari.repository.EmployeeRepository;
-
 
 @Service
 public class EmployeeServiceV1Impl implements EmployeeService {
@@ -29,20 +29,27 @@ public class EmployeeServiceV1Impl implements EmployeeService {
 
 	@Override
 	public List<Employee> allEmployee() {
-		// TODO Auto-generated method stub
-		return null;
+		List<EmployeeEntity> allEmployee = repo.findAll();
+		List<Employee> employees = allEmployee.stream().map(employeeEntity -> {
+			Employee e = new Employee();
+			BeanUtils.copyProperties(employeeEntity, e);
+			return e;
+		}).collect(Collectors.toList());
+		return employees;
 	}
 
 	@Override
 	public Employee getEmployeeById(String id) {
-		// TODO Auto-generated method stub
-		return null;
+		EmployeeEntity employeeEntity=repo.findById(id).get();
+		Employee e = new Employee();
+		BeanUtils.copyProperties(employeeEntity, e);
+		return e;
 	}
 
 	@Override
 	public String deleteEmployeeById(String id) {
-		// TODO Auto-generated method stub
-		return null;
+		repo.deleteById(id);
+		return "Employee deleted successfully";
 	}
 
 }
